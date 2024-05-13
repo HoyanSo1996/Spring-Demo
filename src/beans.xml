@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+		beans标签: 配置多个bean.
+		bean标签: 配置bean, 即一个java对象.
+    	  - id 属性: 指定该bean在容器中的id. (id属性在同一个上下文中只能有一个, 不能重复)
+    	  - class 属性: 指定类的全路径. (用于spring底层反射创建bean对象)
+	-->
+    <bean class="com.omega.entity.Monster" id="monster01">
+        <!--
+			property标签: 配置当前bean的成员属性
+    		  - name属性: 指定成员变量名
+    		  - value属性: 指定成员变量的值（基本数据类型）
+    		  - ref属性: 指定成员变量引用的bean的id（引用数据类型）
+		-->
+        <property name="id" value="100"/>
+        <property name="name" value="牛魔王"/>
+        <property name="skill" value="芭蕉扇"/>
+    </bean>
+</beans>
