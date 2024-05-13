@@ -20,4 +20,17 @@
         <property name="name" value="牛魔王"/>
         <property name="skill" value="芭蕉扇"/>
     </bean>
+
+
+    <bean class="com.omega.entity.Monster">
+        <property name="id" value="200"/>
+        <property name="name" value="牛魔王2"/>
+        <property name="skill" value="芭蕉扇2"/>
+    </bean>
+
+    <bean class="com.omega.entity.Monster">
+        <property name="id" value="300"/>
+        <property name="name" value="牛魔王3"/>
+        <property name="skill" value="芭蕉扇3"/>
+    </bean>
 </beans>

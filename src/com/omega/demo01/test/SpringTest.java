@@ -34,4 +34,20 @@ public class SpringTest {
         Monster monster0111 = ioc.getBean("monster01", Monster.class);
         System.out.println("monster0111 = " + monster0111);
     }
+
+
+    /**
+     * 如果bean.xml不设置 id，那么系统会默认分配 id，分配 id 的规则是 全类名#数字 (数字从 0 开始)
+     */
+    @Test
+    public void testGetBean2() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        String[] beanDefinitionNames = ioc.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
+        // monster01
+        // com.omega.demo01.entity.Monster#0
+        // com.omega.demo01.entity.Monster#1
+    }
 }
