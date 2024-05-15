@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1. 静态工厂 获取bean -->
+    <bean id="monster01" class="com.omega.demo04.factory.StaticFactory" factory-method="getMonster">
+        <!-- constructor-arg 标签的 value 用来指定 key -->
+        <constructor-arg value="monster01"/>
+    </bean>
+
+    <!-- 2. 实例工厂 获取bean -->
+    <bean id="monsterInstanceFactory" class="com.omega.demo04.factory.InstanceFactory" />
+    <bean id="monster02" factory-bean="monsterInstanceFactory" factory-method="getMonster">
+        <constructor-arg value="monster02"/>
+    </bean>
+    <!-- 创建另一个实例工厂对象, 获取的bean与前面不同 -->
+    <bean id="monsterInstanceFactory2" class="com.omega.demo04.factory.InstanceFactory" />
+    <bean id="monster03" factory-bean="monsterInstanceFactory2" factory-method="getMonster">
+        <constructor-arg value="monster02"/>
+    </bean>
+
+    <!-- 3.FactoryBean 获取bean -->
+    <bean id="monsterFactoryBean" class="com.omega.demo04.factory.CustomFactoryBean">
+        <!-- name 就是指定 customFactoryBean 中的 key 属性, value 就是给 key 属性赋值 -->
+        <property name="key" value="monster04"/>
+    </bean>
+</beans>
