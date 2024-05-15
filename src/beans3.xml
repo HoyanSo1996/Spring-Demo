@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="com.omega.demo03.dao.MemberDAOImpl" id="memberDAO"/>
+
+    <!-- setter 方式注入引用数据类型属性 -->
+    <bean class="com.omega.demo03.service.MemberServiceImpl" id="memberService">
+        <property name="memberDAO" ref="memberDAO"/>
+    </bean>
+
+    <!-- 构造器 方式注入引用数据类型属性 -->
+    <bean class="com.omega.demo03.service.MemberServiceImpl2" id="memberService2">
+        <constructor-arg name="memberDAO" ref="memberDAO"/>
+    </bean>
+
+    <!-- 内部bean 方式注入引用数据类型属性-->
+    <bean class="com.omega.demo03.service.MemberServiceImpl" id="memberService3">
+        <property name="memberDAO">
+            <!-- 不用配置bean的id -->
+            <bean class="com.omega.demo03.dao.MemberDAOImpl"/>
+        </property>
+    </bean>
+    <bean class="com.omega.demo03.service.MemberServiceImpl2" id="memberService4">
+        <constructor-arg name="memberDAO">
+            <bean class="com.omega.demo03.dao.MemberDAOImpl"/>
+        </constructor-arg>
+    </bean>
+
+    <!--
+        ==============================================================================
+    -->
+    <bean class="com.omega.entity.Monster" id="monster01">
+        <property name="id" value="100"/>
+        <property name="name" value="孙悟空"/>
+        <property name="skill" value="72变"/>
+    </bean>
+
+    <!-- 1. 数组类型数据 -->
+    <bean class="com.omega.entity.Master" id="master01">
+        <property name="monsterNames">
+            <array>
+                <value>银角大王</value>
+                <value>金角大王</value>
+            </array>
+        </property>
+    </bean>
+
+    <!-- List 类型数据 -->
+    <bean class="com.omega.entity.Master" id="master02">
+        <property name="name" value="唐僧"/>
+        <property name="monsterList">
+            <list>
+                <!--可以使用引用方式, 也可以使用内部bean对象方式-->
+                <ref bean="monster01"/>
+                <bean class="com.omega.entity.Monster" id="monster01">
+                    <property name="id" value="200"/>
+                    <property name="name" value="猪八戒"/>
+                    <property name="skill" value="36变"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 3. Set 类型数据 -->
+    <bean class="com.omega.entity.Master" id="master03">
+        <property name="name" value="唐僧"/>
+        <property name="monsterSet">
+            <set>
+                <!--可以使用引用方式, 也可以使用内部bean对象方式-->
+                <ref bean="monster01"/>
+                <bean class="com.omega.entity.Monster" id="monster01">
+                    <property name="id" value="300"/>
+                    <property name="name" value="沙僧"/>
+                    <property name="skill" value="游泳"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <!-- 4. Map 类型数据 -->
+    <bean class="com.omega.entity.Master" id="master04">
+        <property name="name" value="唐僧"/>
+        <property name="monsterMap">
+            <map>
+                <!-- k-v -->
+                <entry>
+                    <key>
+                        <value>key01</value>
+                    </key>
+                    <ref bean="monster01"/>
+                </entry>
+                <!-- k-v -->
+                <entry>
+                    <key>
+                        <value>key02</value>
+                    </key>
+                    <bean class="com.omega.entity.Monster" id="monster01">
+                        <property name="id" value="400"/>
+                        <property name="name" value="小白龙"/>
+                        <property name="skill" value="变成马"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 5. Properties 类型数据 -->
+    <!-- Properties 是 Hashtable 的子类, 是k-v的形式, 且key和value都是String类型 -->
+    <bean class="com.omega.entity.Master" id="master05">
+        <property name="pros">
+            <props>
+                <prop key="k1">后端工程师</prop>
+                <prop key="k2">前端工程师</prop>
+                <prop key="k3">大数据工程师</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+        ==============================================================================
+    -->
+    <!-- 通过 Util 名称空间 给 list 注入值 -->
+    <util:list id="myBookList">
+        <value>三国演义</value>
+        <value>西游记</value>
+        <value>红楼梦</value>
+        <value>水浒传</value>
+    </util:list>
+
+    <bean class="com.omega.demo03.entity.BookStore" id="bookStore">
+        <property name="bookList" ref="myBookList"/>
+    </bean>
+
+
+    <bean class="com.omega.demo03.entity.Employee"  id="employee">
+        <property name="name" value="jack"/>
+        <property name="dept" ref="dept"/>
+        <property name="dept.name" value="Java开发部"/>
+    </bean>
+
+    <bean id="dept" class="com.omega.demo03.entity.Dept"/>
+</beans>
