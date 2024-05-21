@@ -137,7 +137,7 @@
         <property name="bookList" ref="myBookList"/>
     </bean>
 
-
+    <!-- 通过 级联方式 注入值 -->
     <bean class="com.omega.demo03.entity.Employee"  id="employee">
         <property name="name" value="jack"/>
         <property name="dept" ref="dept"/>
@@ -145,4 +145,20 @@
     </bean>
 
     <bean id="dept" class="com.omega.demo03.entity.Dept"/>
+
+
+    <!-- 通过 继承方式 注入值 -->
+    <bean class="com.omega.entity.Student" id="student06">
+        <property name="id" value="600"/>
+        <property name="name" value="马云"/>
+        <property name="hobby" value="当老师"/>
+    </bean>
+
+    <bean class="com.omega.entity.Student" id="student07" parent="student06"/>
+
+    <bean class="com.omega.entity.Student" id="student08" abstract="true">
+        <property name="id" value="800"/>
+        <property name="name" value="马斯克"/>
+        <property name="hobby" value="改变世界"/>
+    </bean>
 </beans>

@@ -5,6 +5,7 @@ import com.omega.demo03.service.MemberServiceImpl;
 import com.omega.demo03.service.MemberServiceImpl2;
 import com.omega.demo03.entity.BookStore;
 import com.omega.entity.Master;
+import com.omega.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -122,5 +123,23 @@ public class SpringTest3 {
     public void testSetPropertiesDirectly() {
         Employee employee = ioc.getBean("employee", Employee.class);
         System.out.println(employee);
+    }
+
+    /**
+     * 通过 继承方式 设置bean属性
+     */
+    @Test
+    public void testSetBeanPropertiesByExtends() {
+        Student student07 = ioc.getBean("student07", Student.class);
+        System.out.println(student07);
+    }
+
+    /**
+     * 将配置bean的 abstract 属性设置为true, 那么这个bean只可以继承, 不能被实例化
+     */
+    @Test
+    public void testSetBeanPropertiesByExtends2() {
+        Student student08 = ioc.getBean("student08", Student.class);
+        System.out.println(student08);
     }
 }
