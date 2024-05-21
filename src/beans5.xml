@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        Bean 的创建顺序：
+        (1) 使用setXxx()方法:
+            1. 按顺序进行实例化.(不为Bean赋值)
+            2. 等创建完所有Bean后再调用setXxx()方法为Bean进行赋值.
+        (2) 使用构造器方法:
+            1. 按顺序进行实例化.(边创建边为Bean赋值)
+            2. 如果涉及到 Bean1 的属性引用到了 Bean2, 但 Bean2 还未创建, 那么会将 Bean2 的创建次序放到 Bean1 前面.
+    -->
+    <bean class="com.omega.demo05.service.MemberServiceImpl" id="memberService">
+        <!-- <property name="memberDAO" ref="MemberDAO"/>-->
+        <!-- <property name="service" value="service"/>-->
+        <constructor-arg name="memberDAO" ref="memberDAO"/>
+        <constructor-arg name="service" value="service"/>
+    </bean>
+
+    <bean class="com.omega.demo05.dao.MemberDAOImpl" id="memberDAO">
+        <!--  <property name="dao" value="dao"/>-->
+        <constructor-arg name="dao" value="dao"/>
+    </bean>
+</beans>
