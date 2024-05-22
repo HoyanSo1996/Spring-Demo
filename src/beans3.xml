@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/util
-            http://www.springframework.org/schema/util/spring-util.xsd">
+            http://www.springframework.org/schema/util/spring-util.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean class="com.omega.demo03.dao.MemberDAOImpl" id="memberDAO"/>
 
@@ -160,5 +163,47 @@
         <property name="id" value="800"/>
         <property name="name" value="马斯克"/>
         <property name="hobby" value="改变世界"/>
+    </bean>
+
+
+    <!-- 通过 属性文件 注入值 (配置文件要放在src目录下)-->
+    <context:property-placeholder location="classpath:beans3.properties"/>
+    <bean class="com.omega.entity.Student" id="student09">
+        <property name="id" value="${id}"/>
+        <property name="name" value="${name}"/>
+        <property name="hobby" value="${hobby}"/>
+    </bean>
+    <bean class="com.omega.entity.Student" id="student10">
+        <property name="id" value="${id2}"/>
+        <property name="name" value="${name2}"/>
+        <property name="hobby" value="${hobby2}"/>
+    </bean>
+
+
+    <!--
+        ==============================================================================
+    -->
+    <!-- 通过 自动装配 方式配置 Bean -->
+    <bean class="com.omega.demo03.dao.OrderDAO" id="orderDAO" />
+<!--    <bean class="com.omega.demo03.service.OrderService" id="orderService" autowire="byType"/>-->
+<!--    <bean class="com.omega.demo03.servlet.OrderServlet" id="orderServlet" autowire="byType"/>-->
+    <bean class="com.omega.demo03.service.OrderService" id="orderService" autowire="byName"/>
+    <bean class="com.omega.demo03.servlet.OrderServlet" id="orderServlet" autowire="byName"/>
+
+
+    <!-- 通过 SpringEL 配置 Bean -->
+    <bean class="com.omega.demo03.entity.SpringELBean" id="springELBean">
+        <!-- spring el 给字面量-->
+        <property name="name" value="#{'Kenny'}"/>
+        <!-- spring el 引用其他 bean-->
+        <property name="monster" value="#{monster01}"/>
+        <!-- spring el 引用其他 bean 的属性值-->
+        <property name="monsterName" value="#{monster01.name}"/>
+        <!-- spring el 调用普通方法赋值-->
+        <property name="crySound" value="#{springELBean.cry('叽叽')}"/>
+        <!-- spring el 调用静态方法赋值-->
+        <property name="bookName" value="#{T(com.omega.demo03.entity.SpringELBean).read('天龙八部')}"/>
+        <!-- spring el 通过运算赋值-->
+        <property name="result" value="#{6*6.5}"/>
     </bean>
 </beans>

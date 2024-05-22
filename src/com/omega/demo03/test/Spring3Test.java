@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author KennySo
  * @date 2024/5/14
  */
-public class SpringTest3 {
+public class Spring3Test {
 
     private final ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("/beans3.xml");
 
@@ -141,5 +141,17 @@ public class SpringTest3 {
     public void testSetBeanPropertiesByExtends2() {
         Student student08 = ioc.getBean("student08", Student.class);
         System.out.println(student08);
+    }
+
+    /**
+     * 通过 属性文件 为 bean 赋值
+     */
+    @Test
+    public void testSetBeanPropertiesByFile() {
+        Student student09 = ioc.getBean("student09", Student.class);
+        System.out.println(student09);
+
+        Student student10 = ioc.getBean("student10", Student.class);
+        System.out.println(student10);
     }
 }
