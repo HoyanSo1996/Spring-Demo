@@ -13,4 +13,7 @@
     <bean class="com.omega.demo06.entity.House" id="house1" init-method="init" destroy-method="destroy">
         <property name="name" value="大豪宅"/>
     </bean>
+
+    <!-- 配置Bean后置处理器, 对所有bean起作用 -->
+    <bean class="com.omega.demo06.processor.CustomBeanPostProcessor" id="customBeanPostProcessor"/>
 </beans>
