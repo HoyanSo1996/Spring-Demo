@@ -16,4 +16,10 @@
 
     <!-- 配置Bean后置处理器, 对所有bean起作用 -->
     <bean class="com.omega.demo06.processor.CustomBeanPostProcessor" id="customBeanPostProcessor"/>
+
+
+    <!---->
+    <bean class="com.omega.demo06.entity.Dog" id="dog">
+        <property name="name" value="小白"/>
+    </bean>
 </beans>
