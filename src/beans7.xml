@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置自动扫描的包，需要加入 context 名称空间 -->
+<!--    <context:component-scan base-package="com.omega.demo07.component" />-->
+
+    <!--
+        Details:
+         (1) 自动扫描的包可以使用通配符.
+         (2) 指定包时, 会扫描到包的 类 和 子包.
+         (3) 可以指定 要扫描 的类的类名. 例如: 只扫描demo07包(不包含子包)下的 User 开头的类;
+         (4) 可以指定 要排除扫描 的注解. annotation 表示按照注解方式进行扫描; expression 是注解的全类名.
+         (5) 可以指定 要扫描 的注解. use-default-filters 指的是默认的过滤机制, 这里要关闭, 否则会失效.
+    -->
+<!--    <context:component-scan base-package="com.omega.demo07.*" />-->
+<!--    <context:component-scan base-package="com.omega.demo07" />-->
+<!--    <context:component-scan base-package="com.omega.demo07.component" resource-pattern="User*.class"/>-->
+<!--    <context:component-scan base-package="com.omega.demo07">-->
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+<!--    </context:component-scan>-->
+    <context:component-scan base-package="com.omega.demo07" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+</beans>
