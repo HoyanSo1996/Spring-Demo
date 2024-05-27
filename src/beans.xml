@@ -22,15 +22,17 @@
     </bean>
 
 
-    <bean class="com.omega.entity.Monster">
-        <property name="id" value="200"/>
-        <property name="name" value="牛魔王2"/>
-        <property name="skill" value="芭蕉扇2"/>
-    </bean>
+    <!-- 下面两个配置bean用来测试 demo01 的 testGetBean2 方法-->
+    <!-- 需要测试时再放开注释 -->
+<!--    <bean class="com.omega.entity.Monster">-->
+<!--        <property name="id" value="200"/>-->
+<!--        <property name="name" value="牛魔王2"/>-->
+<!--        <property name="skill" value="芭蕉扇2"/>-->
+<!--    </bean>-->
 
-    <bean class="com.omega.entity.Monster">
-        <property name="id" value="300"/>
-        <property name="name" value="牛魔王3"/>
-        <property name="skill" value="芭蕉扇3"/>
-    </bean>
+<!--    <bean class="com.omega.entity.Monster">-->
+<!--        <property name="id" value="300"/>-->
+<!--        <property name="name" value="牛魔王3"/>-->
+<!--        <property name="skill" value="芭蕉扇3"/>-->
+<!--    </bean>-->
 </beans>
