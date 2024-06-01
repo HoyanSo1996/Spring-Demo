@@ -3,7 +3,7 @@ package com.omega.demo00.test;
 import com.omega.demo00.ioc.CustomApplicationContext;
 
 /**
- * Class Test
+ * Class ProxyTest
  *
  * @author KennySo
  * @date 2024/5/14
