@@ -1,5 +1,6 @@
 package com.omega.demo08.test;
 
+import com.omega.demo08.config.SpringConfig;
 import com.omega.demo08.component.UserController;
 import com.omega.demo08.component.UserService;
 import com.omega.demo08.component2.MemberController;
@@ -10,7 +11,7 @@ import com.omega.demo08.component4.service.BookService;
 import com.omega.demo08.component4.service.PhoneService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Class Spring8Test
@@ -20,7 +21,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Spring8Test {
 
-    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans8.xml");
+    // private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans8.xml");
+
+    // 测试使用 @ComponentScan 注解替代 xml 中的 context:component-scan 扫描
+    private final ApplicationContext ioc = new AnnotationConfigApplicationContext(SpringConfig.class);
 
     /**
      * 测试 @Autowired 注解装配
@@ -31,11 +35,11 @@ public class Spring8Test {
         userController.say();
 
         UserService userService01 = ioc.getBean("userService01", UserService.class);
-        UserService userService02 = ioc.getBean("userService02", UserService.class);
-        UserService userService03 = ioc.getBean("userService03", UserService.class);
+        // UserService userService02 = ioc.getBean("userService02", UserService.class);
+        // UserService userService03 = ioc.getBean("userService03", UserService.class);
         System.out.println("userService01 = " + userService01);
-        System.out.println("userService02 = " + userService02);
-        System.out.println("userService03 = " + userService03);
+        // System.out.println("userService02 = " + userService02);
+        // System.out.println("userService03 = " + userService03);
     }
 
 
