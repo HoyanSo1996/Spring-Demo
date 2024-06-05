@@ -1,5 +1,6 @@
 package com.omega.demo10.test;
 
+import com.omega.demo10.component.Car;
 import com.omega.demo10.component.SmartAnimal;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -35,5 +36,18 @@ public class Spring10Test {
         // 可以使用 id 获取 Bean, 但获取的类型依然为 Proxy 类
         Object smartDog2 = ioc.getBean("smartDog");
         System.out.println("smartDog2 的运行类型 = " + smartDog2.getClass());
+    }
+
+
+    /**
+     * 测试 SpringGCLIB 动态代理
+     * (即为没有接口的类创建代理对象)
+     */
+    @Test
+    public void testCar() {
+        Car car = ioc.getBean(Car.class);
+        car.run();
+        // car 的运行类型 = Car$$EnhancerBySpringCGLIB$$7b933c74
+        System.out.println("car的运行类型" + car.getClass());
     }
 }
