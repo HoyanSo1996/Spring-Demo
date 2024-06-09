@@ -1,10 +1,8 @@
 package com.omega.demo11.aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -53,6 +51,7 @@ public class ShipAspect {
     }
 
 
+    // 后置通知。方法的参数名 要和 returning="res" 的属性值一致。
     @AfterReturning(value = "execution(public String com.omega.demo11.component.Ship.run(double))", returning = "res")
     public void showSuccessEndLog(JoinPoint joinPoint, Object res) {
         System.out.println("正常信息 = " + res);
@@ -62,5 +61,30 @@ public class ShipAspect {
     @AfterThrowing(value = "execution(public String com.omega.demo11.component.Ship.run(double))", throwing = "e")
     public void showFailEndLog(JoinPoint joinPoint, Throwable e) {
         System.out.println("异常信息 = " + e);
+    }
+
+    /**
+     * 环绕通知 的结构要写成 try-catch-finally
+     */
+    @Around(value = "execution(public String com.omega.demo11.component.Ship.run(double, int))")
+    public Object doAround(ProceedingJoinPoint joinPoint) {
+        Object result = null;
+        String methodName = joinPoint.getSignature().getName();
+        try {
+            // 1.相当于前置通知
+            System.out.println("AOP 环绕通知[前置通知]--" + methodName + "方法开始--参数--" + Arrays.toString(joinPoint.getArgs()));
+            // 在环绕通知中要调用joinPoint.proceed()来执行目标方法
+            result = joinPoint.proceed();
+            // 2.相当于返回通知
+            System.out.println("AOP 环绕通知[返回通知]--" + methodName + "方法结束--结果--" + result);
+
+        } catch (Throwable throwable) {
+            // 3.相当于异常通知
+            System.out.println("AOP 环绕通知[异常通知]--" + methodName + "方法抛出异常--异常对象--" + throwable);
+        } finally {
+            // 4.相当于后置通知
+            System.out.println("AOP 环绕通知[后置通知]--" + methodName + "方法最终结束...");
+        }
+        return result;
     }
 }

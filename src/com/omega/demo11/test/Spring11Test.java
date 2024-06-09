@@ -30,4 +30,10 @@ public class Spring11Test {
         Ship ship = ioc.getBean(Ship.class);
         ship.run(100);
     }
+
+    @Test
+    public void testShipDoAround() {
+        Ship ship = ioc.getBean(Ship.class);
+        ship.run(120, 2);
+    }
 }

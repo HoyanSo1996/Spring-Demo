@@ -20,4 +20,8 @@ public class Ship {
         return "ship have voyaged for " + miles + " miles.";
     }
 
+    public String run(double miles, int day) {
+        // int i = 1 / 0;
+        return "ship have voyaged for " + miles + " miles in " + day + "s.";
+    }
 }
