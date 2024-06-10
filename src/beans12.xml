@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- xml 开启 aop -->
+    <!-- 1. 配置目标对象 -->
+    <bean id="smartDog" class="com.omega.demo12.component.SmartDog"/>
+
+    <!-- 2. 配置切面类对象 -->
+    <bean id="smartAnimalAspect" class="com.omega.demo12.aspect.SmartAnimalAspect"/>
+
+    <!-- 3.进行切面配置 -->
+    <aop:config>
+        <!-- 3.1 配置切入点 -->
+        <aop:pointcut id="myPointcut" expression="execution(public double com.omega.demo12.component.SmartDog.getSum(double, double))"/>
+        <!-- 3.2 配置切面中的通知方法 -->
+        <aop:aspect ref="smartAnimalAspect" order="10">
+            <!-- 前置通知 -->
+            <aop:before method="showBeginLog" pointcut-ref="myPointcut"/>
+            <!-- 返回通知 -->
+            <aop:after-returning method="showSuccessEndLog" returning="res" pointcut-ref="myPointcut"/>
+            <!-- 异常通知 -->
+            <aop:after-throwing method="showExceptionLog" throwing="e" pointcut-ref="myPointcut"/>
+            <!-- 后置通知 -->
+            <aop:after method="showFinalLog" pointcut-ref="myPointcut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
