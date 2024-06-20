@@ -16,7 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Spring7Test {
 
-    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans7.xml");
+    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans7.xml");
 
     @Test
     public void getBeanByAnnotation() {

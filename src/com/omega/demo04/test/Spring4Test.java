@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Spring4Test {
 
-    private final static ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans4.xml");
+    private final static ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans4.xml");
 
     /**
      * 通过 静态工厂 获取 bean

@@ -15,7 +15,7 @@ public class Spring12Test {
 
     @Test
     public void test() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans12.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans12.xml");
         SmartAnimal smartAnimal = ioc.getBean(SmartAnimal.class);
         smartAnimal.getSum(100, 88);
     }

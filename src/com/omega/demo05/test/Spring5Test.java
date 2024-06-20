@@ -15,7 +15,7 @@ public class Spring5Test {
 
     @Test
     public void testCreateBeanOrder() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans5.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans5.xml");
         MemberServiceImpl memberService = ioc.getBean("memberService", MemberServiceImpl.class);
         memberService.addMember();
     }

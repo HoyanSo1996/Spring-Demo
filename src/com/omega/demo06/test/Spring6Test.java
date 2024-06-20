@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Spring6Test {
 
-    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans6.xml");
+    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans6.xml");
 
     /**
      * 测试 bean 的生命周期

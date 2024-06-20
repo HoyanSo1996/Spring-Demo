@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class SpringTest2 {
 
-    private final ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("/beans2.xml");
+    private final ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans2.xml");
 
     /**
      * 使用setter方法为bean的属性赋值

@@ -12,7 +12,7 @@ public class Test {
 
     public static void main(String[] args) {
         try {
-            CustomApplicationContext customApplicationContext = new CustomApplicationContext("beans.xml");
+            CustomApplicationContext customApplicationContext = new CustomApplicationContext("resource/beans.xml");
             // 从IOC容器中获取bean
             Object monster01 = customApplicationContext.getBean("monster01");
             System.out.println(monster01);

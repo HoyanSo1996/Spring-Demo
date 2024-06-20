@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 引入外部属性文件 -->
-    <context:property-placeholder location="classpath:beans13.properties"/>
+    <context:property-placeholder location="classpath:resource/beans13.properties"/>
     <!-- 配置数据源 -->
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
         <property name="user" value="${jdbc.username}"/>

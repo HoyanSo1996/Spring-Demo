@@ -167,7 +167,7 @@
 
 
     <!-- 通过 属性文件 注入值 (配置文件要放在src目录下)-->
-    <context:property-placeholder location="classpath:beans3.properties"/>
+    <context:property-placeholder location="classpath:resource/beans3.properties"/>
     <bean class="com.omega.entity.Student" id="student09">
         <property name="id" value="${id}"/>
         <property name="name" value="${name}"/>

@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Spring10Test {
 
-    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans10.xml");
+    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans10.xml");
 
     /*
         smartAnimal 的运行类型是 class com.sun.proxy.$Proxy19

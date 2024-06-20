@@ -16,7 +16,7 @@ public class SpringTest {
     @Test
     public void testGetBean() {
         // 1.创建ioc容器, 容器与配置文件关联(可以有多个配置文件)
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("resource/beans.xml");
 
         // 2.通过getBean获取对应的对象
         // 使用id来获取bean
@@ -41,7 +41,7 @@ public class SpringTest {
      */
     @Test
     public void testGetBean2() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("resource/beans.xml");
         String[] beanDefinitionNames = ioc.getBeanDefinitionNames();
         for (String beanDefinitionName : beanDefinitionNames) {
             System.out.println(beanDefinitionName);

@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class Spring13Test {
 
-    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/beans13.xml");
+    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
 
     /**
      * 测试数据源

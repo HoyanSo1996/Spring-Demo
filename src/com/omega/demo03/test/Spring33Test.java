@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Spring33Test {
 
-    private final ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("/beans3.xml");
+    private final ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans3.xml");
 
     /**
      * 通过 自动装配 方式注入值
