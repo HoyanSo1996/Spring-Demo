@@ -3,6 +3,7 @@ package com.omega.demo14.service;
 import com.omega.demo14.dao.GoodsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -25,7 +26,20 @@ public class GoodsService {
         // 更新商品余额
         goodsDAO.updateBalance(userId, price * amount);
         // 模拟异常
-        // int i = 1/0;
+        //int i = 1/0;
+        // 更新商品库存
+        goodsDAO.updateAmount(goodsId, amount);
+        System.out.println("购买商品成功...");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void buyGoods2(int userId, int goodsId, int amount) {
+        // 查询商品价格
+        Float price = goodsDAO.queryPriceById(goodsId);
+        // 更新商品余额
+        goodsDAO.updateBalance(userId, price * amount);
+        // 模拟异常
+        int i = 1/0;
         // 更新商品库存
         goodsDAO.updateAmount(goodsId, amount);
         System.out.println("购买商品成功...");

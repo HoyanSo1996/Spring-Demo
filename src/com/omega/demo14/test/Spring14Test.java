@@ -1,6 +1,7 @@
 package com.omega.demo14.test;
 
 import com.omega.demo14.service.GoodsService;
+import com.omega.demo14.service.MultiplyGoodsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,5 +20,11 @@ public class Spring14Test {
     public void testJdbcTemplateWithTx() {
         GoodsService goodsService = ioc.getBean(GoodsService.class);
         goodsService.buyGoods(1, 1, 1);
+    }
+
+    @Test
+    public void testJdbcTemplateWithTxPropagation() {
+        MultiplyGoodsService multiplyGoodsService = ioc.getBean(MultiplyGoodsService.class);
+        multiplyGoodsService.buyGoodsTwins();
     }
 }
