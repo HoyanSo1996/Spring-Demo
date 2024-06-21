@@ -1,8 +1,10 @@
 package com.omega.demo13.test;
 
 import com.omega.demo13.component.Monster;
+import com.omega.demo13.config.SpringConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,13 +29,12 @@ import java.util.Map;
  */
 public class Spring13Test {
 
-    private final ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
-
     /**
      * 测试数据源
      */
     @Test
     public void testDataSourceByJdbcTemplate() throws SQLException {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         DataSource dataSource = ioc.getBean(DataSource.class);
         Connection connection = dataSource.getConnection();
         System.out.println("connection = " + connection);
@@ -42,6 +43,7 @@ public class Spring13Test {
 
     @Test
     public void testAddDataByJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
         String sql = "INSERT INTO monster VALUES(?, ?, ?)";
         int affected = jdbcTemplate.update(sql, 400, "红孩儿", "三味真火");
@@ -50,6 +52,7 @@ public class Spring13Test {
 
     @Test
     public void testUpdateDataByJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
         String sql = "UPDATE monster SET skill = ? WHERE id = ?";
         int affected = jdbcTemplate.update(sql, "美人计", 300);
@@ -58,6 +61,7 @@ public class Spring13Test {
 
     @Test
     public void testAddBatchDataByJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
         String sql = "INSERT INTO monster VALUES(?, ?, ?)";
         List<Object[]> paramList = new ArrayList<>();
@@ -72,6 +76,7 @@ public class Spring13Test {
      */
     @Test
     public void testQueryDataByJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
         String sql = "SELECT id, name, skill FROM monster WHERE id = ?";
         RowMapper<Monster> rowMapper = new BeanPropertyRowMapper<>(Monster.class);
@@ -84,6 +89,7 @@ public class Spring13Test {
      */
     @Test
     public void testQueryMulDataByJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
         String sql = "SELECT id, name, skill FROM monster WHERE id > ?";
         RowMapper<Monster> rowMapper = new BeanPropertyRowMapper<>(Monster.class);
@@ -98,6 +104,7 @@ public class Spring13Test {
      */
     @Test
     public void testQueryScalarDataByJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
         String sql = "SELECT COUNT(*) FROM monster WHERE id > ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, 200);
@@ -109,6 +116,7 @@ public class Spring13Test {
      */
     @Test
     public void testAddDataByNamedParameterJdbcTemplate() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         NamedParameterJdbcTemplate jdbcTemplate = ioc.getBean(NamedParameterJdbcTemplate.class);
         String sql = "INSERT INTO monster VALUES(:my_id, :name, :skill)";
         Map<String, Object> paramMap = new HashMap<>();
@@ -124,11 +132,26 @@ public class Spring13Test {
      */
     @Test
     public void testAddDataByNamedParameterJdbcTemplate2() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("/resource/beans13.xml");
         NamedParameterJdbcTemplate jdbcTemplate = ioc.getBean(NamedParameterJdbcTemplate.class);
         String sql = "INSERT INTO monster VALUES(:id, :name, :skill)";
         Monster monster = new Monster(800, "蜈蚣精", "咬人");
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(monster);
         int affected = jdbcTemplate.update(sql, sqlParameterSource);
         System.out.println(affected > 0 ? "插入数据成功!" : "插入数据失败!");
+    }
+
+
+    /**
+     * 使用 注解方式 配置 数据源
+     */
+    @Test
+    public void testSetDataSourceByAnnotation() {
+        ApplicationContext ioc = new AnnotationConfigApplicationContext(SpringConfig.class);
+        JdbcTemplate jdbcTemplate = ioc.getBean(JdbcTemplate.class);
+        String sql = "SELECT id, name, skill FROM monster WHERE id = ?";
+        RowMapper<Monster> rowMapper = new BeanPropertyRowMapper<>(Monster.class);
+        Monster monster = jdbcTemplate.queryForObject(sql, rowMapper, 100);
+        System.out.println(monster);
     }
 }
