@@ -33,4 +33,11 @@ public class Spring14Test {
         GoodsService goodsService = ioc.getBean(GoodsService.class);
         goodsService.queryGoodsByTxISOLATION(1);
     }
+
+    @Test
+    public void testJdbcTemplateWithTxTimeout() {
+        GoodsService goodsService = ioc.getBean(GoodsService.class);
+        goodsService.buyGoods3(1, 1, 1);
+        System.out.println("购买商品成功...");
+    }
 }

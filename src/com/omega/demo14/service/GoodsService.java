@@ -60,4 +60,20 @@ public class GoodsService {
         goodsPrice = goodsDAO.queryPriceById(goodsId);
         System.out.println("第二次读取的价格 = " + goodsPrice);
     }
+
+    @Transactional(timeout = 2)
+    public void buyGoods3(int userId, int goodsId, int amount) {
+        // 查询商品价格
+        Float price = goodsDAO.queryPriceById(goodsId);
+        // 更新商品余额
+        goodsDAO.updateBalance(userId, price * amount);
+        // 模拟超时
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // 更新商品库存
+        goodsDAO.updateAmount(goodsId, amount);
+    }
 }
