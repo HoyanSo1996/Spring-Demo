@@ -27,4 +27,10 @@ public class Spring14Test {
         MultiplyGoodsService multiplyGoodsService = ioc.getBean(MultiplyGoodsService.class);
         multiplyGoodsService.buyGoodsTwins();
     }
+
+    @Test
+    public void testJdbcTemplateWithTxIsolation() {
+        GoodsService goodsService = ioc.getBean(GoodsService.class);
+        goodsService.queryGoodsByTxISOLATION(1);
+    }
 }
