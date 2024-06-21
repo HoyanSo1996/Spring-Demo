@@ -1,6 +1,5 @@
 package com.omega.demo08.test;
 
-import com.omega.demo08.config.SpringConfig;
 import com.omega.demo08.component.UserController;
 import com.omega.demo08.component.UserService;
 import com.omega.demo08.component2.MemberController;
@@ -9,6 +8,9 @@ import com.omega.demo08.component3.AdminController;
 import com.omega.demo08.component3.AdminService;
 import com.omega.demo08.component4.service.BookService;
 import com.omega.demo08.component4.service.PhoneService;
+import com.omega.demo08.component5.CarService;
+import com.omega.demo08.component5.CarService2;
+import com.omega.demo08.config.SpringConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -88,4 +90,15 @@ public class Spring8Test {
         phoneService.save();
     }
 
+    /**
+     * 测试 @Value 注解装配
+     */
+    @Test
+    public void setPropertiesByAnnotation4() {
+        CarService carService = ioc.getBean(CarService.class);
+        carService.print();
+
+        CarService2 carService2 = ioc.getBean(CarService2.class);
+        carService2.print();
+    }
 }
